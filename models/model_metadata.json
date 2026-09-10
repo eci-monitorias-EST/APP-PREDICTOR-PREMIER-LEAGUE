@@ -1,0 +1,26 @@
+{
+  "model_key": "mlp_keras",
+  "model_name": "Red Neuronal Keras (test 2025-2026)",
+  "features": [
+    "elo_diff",
+    "winrate_diff"
+  ],
+  "classes_order": [
+    "A",
+    "D",
+    "H"
+  ],
+  "hyperparams": {
+    "hidden_layer_sizes": [
+      64,
+      32
+    ],
+    "dropout": 0.0,
+    "batch_size": 32,
+    "alpha": 0.001,
+    "activation": "relu"
+  },
+  "trained_rows": 7600,
+  "trained_through_season": "2025-2026",
+  "is_keras": true
+}

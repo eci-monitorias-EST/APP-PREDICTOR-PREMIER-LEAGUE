@@ -1,0 +1,310 @@
+{
+  "Sheffield United": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Arsenal": [
+    1,
+    0,
+    1,
+    1,
+    1
+  ],
+  "Everton": [
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Newcastle United": [
+    1,
+    0,
+    0,
+    1,
+    1
+  ],
+  "Portsmouth": [
+    1,
+    0,
+    0,
+    0,
+    1
+  ],
+  "Reading": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "West Ham United": [
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "Bolton Wanderers": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Manchester United": [
+    1,
+    0,
+    1,
+    1,
+    1
+  ],
+  "Chelsea": [
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "Watford": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Tottenham Hotspur": [
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "Aston Villa": [
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "Manchester City": [
+    0,
+    1,
+    1,
+    1,
+    0
+  ],
+  "Blackburn Rovers": [
+    1,
+    0,
+    0,
+    1,
+    0
+  ],
+  "Charlton Athletic": [
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Fulham": [
+    0,
+    1,
+    1,
+    0,
+    1
+  ],
+  "Middlesbrough": [
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "Liverpool": [
+    0,
+    1,
+    1,
+    0,
+    0
+  ],
+  "Wigan Athletic": [
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Sunderland": [
+    0,
+    1,
+    0,
+    0,
+    1
+  ],
+  "Derby County": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Birmingham City": [
+    0,
+    1,
+    1,
+    0,
+    0
+  ],
+  "Hull City": [
+    1,
+    1,
+    1,
+    0,
+    0
+  ],
+  "Stoke City": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "West Bromwich Albion": [
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Wolverhampton Wanderers": [
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Burnley": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Blackpool": [
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "Queens Park Rangers": [
+    0,
+    0,
+    0,
+    0,
+    1
+  ],
+  "Swansea City": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Norwich City": [
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Southampton": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Crystal Palace": [
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Cardiff City": [
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Leicester City": [
+    0,
+    0,
+    0,
+    1,
+    1
+  ],
+  "AFC Bournemouth": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "Brighton and Hove Albion": [
+    0,
+    1,
+    1,
+    1,
+    0
+  ],
+  "Huddersfield Town": [
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "Leeds": [
+    0,
+    0,
+    1,
+    1,
+    1
+  ],
+  "Brentford": [
+    0,
+    0,
+    0,
+    1,
+    0
+  ],
+  "Nottingham Forest": [
+    0,
+    0,
+    1,
+    0,
+    0
+  ],
+  "Luton": [
+    0,
+    1,
+    0,
+    0,
+    0
+  ],
+  "Ipswich Town": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}
