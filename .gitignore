@@ -1,0 +1,30 @@
+# Entorno virtual
+venv/
+env/
+.venv/
+
+# Cachés de Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Sistema operativo / editor
+.DS_Store
+.vscode/
+
+# Streamlit
+.streamlit/secrets.toml
+
+# NOTA IMPORTANTE:
+# NO ignores data/processed/, models/ ni reports/.
+# app.py necesita en tiempo de ejecución:
+#   - models/modelo_final.pkl
+#   - models/model_metadata.json
+#   - data/processed/elo_ratings_final.json
+#   - data/processed/team_home_form.json
+#   - data/processed/team_away_form.json
+# Streamlit Cloud solo clona el repo, NO corre 01/02/03/04 por ti.
+# Si los ignoras, la app se cae al desplegar por archivos faltantes.
