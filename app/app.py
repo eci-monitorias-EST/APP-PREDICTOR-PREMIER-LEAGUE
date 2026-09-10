@@ -15,12 +15,26 @@ import pandas as pd
 import streamlit as st
 
 from team_colors import get_team_color, DEFAULT_COLOR
+from team_badges import render_team_badge
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
 MODELS_DIR = BASE_DIR / "models"
+ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
 st.set_page_config(page_title="Predictor Premier League", page_icon="⚽", layout="centered")
+
+
+def load_css():
+    """Inyecta app/assets/style.css. Es solo presentación: si el archivo
+    no existe por alguna razón, la app sigue funcionando con el estilo
+    por defecto de Streamlit."""
+    css_path = ASSETS_DIR / "style.css"
+    if css_path.exists():
+        st.markdown(f"<style>{css_path.read_text()}</style>", unsafe_allow_html=True)
+
+
+load_css()
 
 
 # =========================================
@@ -109,24 +123,32 @@ def predict_probabilities(home_team: str, away_team: str):
 def render_probability_bar(home_team, away_team, probs):
     home_color = get_team_color(home_team)
     away_color = get_team_color(away_team)
-    draw_color = "#E0E0E0"
 
     p_home = probs["home_win"] * 100
     p_draw = probs["draw"] * 100
     p_away = probs["away_win"] * 100
 
     html = f"""
-    <div style="font-family: Arial, sans-serif;">
-      <div style="display:flex; justify-content:space-between; font-size:14px;
-                  font-weight:600; margin-bottom:6px;">
-        <span style="color:{home_color};">{home_team} · {p_home:.0f}%</span>
-        <span style="color:#666;">Empate · {p_draw:.0f}%</span>
-        <span style="color:{away_color};">{away_team} · {p_away:.0f}%</span>
+    <div class="result-panel">
+      <div class="result-row">
+        <div>
+          {render_team_badge(home_team, home_color)}
+          <div class="team-name">{home_team}</div>
+          <div class="result-pct" style="color:{home_color};">{p_home:.0f}%</div>
+        </div>
+        <div>
+          <div class="draw-label">Empate</div>
+          <div class="result-pct result-pct--draw">{p_draw:.0f}%</div>
+        </div>
+        <div>
+          {render_team_badge(away_team, away_color)}
+          <div class="team-name">{away_team}</div>
+          <div class="result-pct" style="color:{away_color};">{p_away:.0f}%</div>
+        </div>
       </div>
-      <div style="display:flex; width:100%; height:28px; border-radius:6px;
-                  overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,0.15);">
+      <div class="prob-track">
         <div style="width:{p_home}%; background-color:{home_color};"></div>
-        <div style="width:{p_draw}%; background-color:{draw_color};"></div>
+        <div style="width:{p_draw}%; background-color:#5C6F63;"></div>
         <div style="width:{p_away}%; background-color:{away_color};"></div>
       </div>
     </div>
@@ -143,11 +165,22 @@ st.caption(
     f"entrenado con {metadata['trained_rows']} partidos (hasta {metadata['trained_through_season']})"
 )
 
-col1, col2 = st.columns(2)
-with col1:
-    home_team = st.selectbox("Equipo local", TEAM_LIST, index=TEAM_LIST.index("Arsenal") if "Arsenal" in TEAM_LIST else 0)
-with col2:
-    away_team = st.selectbox("Equipo visitante", TEAM_LIST, index=TEAM_LIST.index("Liverpool") if "Liverpool" in TEAM_LIST else 1)
+with st.container(border=True):
+    col1, col_vs, col2 = st.columns([5, 1, 5])
+    with col1:
+        home_team = st.selectbox(
+            "Equipo local", TEAM_LIST,
+            index=TEAM_LIST.index("Arsenal") if "Arsenal" in TEAM_LIST else 0,
+        )
+        st.markdown(render_team_badge(home_team, get_team_color(home_team)), unsafe_allow_html=True)
+    with col_vs:
+        st.markdown('<div class="vs-divider">VS</div>', unsafe_allow_html=True)
+    with col2:
+        away_team = st.selectbox(
+            "Equipo visitante", TEAM_LIST,
+            index=TEAM_LIST.index("Liverpool") if "Liverpool" in TEAM_LIST else 1,
+        )
+        st.markdown(render_team_badge(away_team, get_team_color(away_team)), unsafe_allow_html=True)
 
 if home_team == away_team:
     st.warning("Elige dos equipos distintos.")
