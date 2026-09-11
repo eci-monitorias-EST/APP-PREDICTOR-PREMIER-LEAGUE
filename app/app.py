@@ -22,7 +22,7 @@ PROCESSED_DIR = BASE_DIR / "data" / "processed"
 MODELS_DIR = BASE_DIR / "models"
 ASSETS_DIR = Path(__file__).resolve().parent / "assets"
 
-st.set_page_config(page_title="Predictor Premier League", page_icon="⚽", layout="centered")
+st.set_page_config(page_title="Predictor Premier League", layout="centered")
 
 
 def load_css():
@@ -159,7 +159,7 @@ def render_probability_bar(home_team, away_team, probs):
 # =========================================
 # UI
 # =========================================
-st.title("⚽ Predictor Premier League")
+st.title("Predictor Premier League")
 st.caption(
     f"Modelo desplegado: **{metadata['model_name']}** · "
     f"entrenado con {metadata['trained_rows']} partidos (hasta {metadata['trained_through_season']})"

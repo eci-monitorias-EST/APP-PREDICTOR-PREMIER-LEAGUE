@@ -28,3 +28,7 @@ __pycache__/
 #   - data/processed/team_away_form.json
 # Streamlit Cloud solo clona el repo, NO corre 01/02/03/04 por ti.
 # Si los ignoras, la app se cae al desplegar por archivos faltantes.
+
+# Archivos locales auxiliares
+get-pip.py
+*.bundle
