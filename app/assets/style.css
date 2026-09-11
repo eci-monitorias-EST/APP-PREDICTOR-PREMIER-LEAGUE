@@ -1,0 +1,149 @@
+/* =========================================================================
+   style.css — identidad visual de Predictor Premier League
+   Paleta inspirada en un estadio de noche bajo reflectores: verde-negro de
+   cancha, blanco de reflector y un ámbar de marcador como acento. Los
+   colores de cada equipo (team_colors.py) siguen siendo el acento dinámico
+   real del contenido (escudos, barra de probabilidad).
+   ========================================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --pitch-night: #0B1F17;
+  --panel: #12271D;
+  --hairline: #2E4A3B;
+  --ink: #F5F7F2;
+  --ink-muted: #9FB3A6;
+  --whistle: #FFC94D;
+  --draw: #5C6F63;
+}
+
+html, body, [data-testid="stAppViewContainer"], [data-testid="stAppViewContainer"] > .main {
+  background-color: var(--pitch-night);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+}
+
+[data-testid="stHeader"] {
+  background-color: transparent;
+}
+
+.block-container {
+  max-width: 740px;
+  padding-top: 2.4rem;
+}
+
+h1, h2, h3 {
+  font-family: 'Oswald', sans-serif;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
+
+p, span, label, div {
+  color: var(--ink);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid var(--hairline);
+  margin: 1.5rem 0;
+}
+
+/* --- Ficha de equipo (insignia con iniciales, sin logos con derechos) --- */
+.team-badge {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0.5rem auto 0;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #0B1F17;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.vs-divider {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.95rem;
+  color: var(--ink-muted);
+  text-align: center;
+  padding-top: 2.1rem;
+}
+
+/* --- Panel de resultado --- */
+.result-panel {
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background-color: var(--panel);
+  padding: 1.3rem 1.3rem 1.1rem;
+}
+
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: center;
+}
+
+.result-row .team-name {
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-top: 0.35rem;
+  max-width: 9rem;
+}
+
+.result-pct {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+}
+
+.result-pct--draw {
+  font-size: 1.15rem;
+  color: var(--draw);
+}
+
+.result-row .draw-label {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  padding-top: 0.9rem;
+}
+
+.prob-track {
+  display: flex;
+  width: 100%;
+  height: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--hairline);
+  margin-top: 1.1rem;
+}
+
+/* --- Botón principal --- */
+.stButton > button {
+  background-color: var(--whistle);
+  color: #12271D;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 4px;
+  padding: 0.55rem 0;
+}
+
+.stButton > button:hover {
+  background-color: #FFD873;
+  color: #12271D;
+  border: none;
+}
+
+/* --- Expander de detalle --- */
+[data-testid="stExpander"] {
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  background-color: var(--panel);
+}

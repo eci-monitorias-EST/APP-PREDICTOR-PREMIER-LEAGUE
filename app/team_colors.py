@@ -22,10 +22,10 @@ TEAM_COLORS = {
     "Everton": "#003399",
     "Fulham": "#000000",
     "Ipswich Town": "#0044A9",
-    "Leeds United": "#FFCD00",
+    "Leeds": "#FFCD00",  # antes "Leeds United": no coincidía con el dataset y caía en DEFAULT_COLOR
     "Leicester City": "#003090",
     "Liverpool": "#C8102E",
-    "Luton Town": "#F78F1E",
+    "Luton": "#F78F1E",  # antes "Luton Town": mismo caso que Leeds
     "Manchester City": "#6CABDD",
     "Manchester United": "#DA291C",
     "Newcastle United": "#241F20",

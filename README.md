@@ -20,7 +20,12 @@ proyecto_final/
 │   └── 04_retrain_final_model.py
 ├── app/
 │   ├── app.py                <- la app de Streamlit
-│   └── team_colors.py        <- colores por equipo para la barra de probabilidades
+│   ├── team_colors.py        <- colores por equipo para la barra de probabilidades
+│   ├── team_badges.py        <- iniciales por equipo para la ficha circular (sin logos con derechos)
+│   └── assets/
+│       └── style.css         <- identidad visual (colores, tipografías Oswald/Inter)
+├── .streamlit/
+│   └── config.toml           <- tema oscuro nativo de Streamlit
 ├── requirements.txt
 └── README.md
 ```
