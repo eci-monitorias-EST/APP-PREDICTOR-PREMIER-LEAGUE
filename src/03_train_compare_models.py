@@ -6,11 +6,11 @@ Etapa A del plan acordado:
   - Test:  temporada 2025-2026 (backtest histórico, ya jugada por completo)
 
 Comparamos 3 familias de modelos:
-  - Random Forest      (ya lo conocías)
-  - XGBoost             (nuevo)  <- instala con: pip install xgboost
-  - Red neuronal (MLP)  (nuevo)
+  - Random Forest      
+  - XGBoost             
+  - Red neuronal (MLP)  
 
-Métricas: ROC-AUC macro (OVR) como principal -por el desbalance H/D/A-,
+Métricas: ROC-AUC macro (OVR) como principal por el desbalance H/D/A-,
 más log-loss (calibración de probabilidades) y accuracy/classification_report
 de referencia.
 
