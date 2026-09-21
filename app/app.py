@@ -260,9 +260,7 @@ with tab_partido:
   st.divider()
   st.caption(
       "Nota: el ELO y la forma reciente reflejan el estado de los equipos al cierre de la "
-      "temporada 2025-2026. Si juegan más partidos después de esa fecha, hay que "
-      "actualizar estos datos (re-correr el pipeline con los resultados nuevos) para que "
-      "la predicción siga siendo precisa."
+      "temporada 2025-2026."
   )
 
 
@@ -279,11 +277,7 @@ with tab_temporada:
     partidos_sim, tabla_sim = load_simulacion()
 
     if partidos_sim is None:
-        st.info(
-            "Todavía no hay simulación. Genérala con:\n\n"
-            "```\npython src/05_predict_next_season.py\n```\n\n"
-            "Necesita `data/raw/calendario_2026_2027.csv` y el modelo de `models/`."
-        )
+        st.info("La simulación de la temporada 2026-2027 todavía no está disponible.")
     else:
         sims = load_simulaciones_completas()
         n_sims = sims["puntos"].shape[0] if sims else 10_000
@@ -409,8 +403,7 @@ with tab_temporada:
         with sub_explorar:
             if not sims:
                 st.info(
-                    "Falta `data/processed/simulaciones_2026_2027.npz`. "
-                    "Vuelve a correr `python src/05_predict_next_season.py`."
+                    "El detalle de las temporadas simuladas todavía no está disponible."
                 )
             else:
                 st.caption(
@@ -513,23 +506,17 @@ with tab_temporada:
                                  "texto": st.column_config.TextColumn("Resultado"),
                              })
 
-                with st.expander("¿Cuál de estas temporadas debería usar en el informe?"):
+                with st.expander("¿Qué significa cada temporada destacada?"):
                     st.markdown(
-                        "**Representativa** — la más típica: sus puntos de campeón, de colista, "
-                        "su dispersión, su número de empates y su coincidencia con el orden "
-                        "esperado están todos cerca de la mediana. Es la más honesta como "
-                        "\"así podría verse la temporada\".\n\n"
-                        "**La más parecida a lo esperado** — la que mejor reproduce el orden del "
-                        "promedio (Arsenal, City, United...). Es la más limpia de presentar, "
-                        "pero justamente por eso es POCO típica: casi no tiene sorpresas, y una "
-                        "temporada real siempre las trae.\n\n"
-                        "**La más caótica** — el otro extremo, donde el orden final casi no se "
-                        "parece al esperado. Sirve para mostrar hasta dónde llega la "
-                        "incertidumbre.\n\n"
-                        "Si vas a mostrar una sola, usa la representativa y menciona que existen "
-                        "las otras dos. Si quieres contrastar, poner la esperada al lado de la "
-                        "caótica deja clarísimo el mensaje: el modelo ordena bien en promedio, "
-                        "pero una temporada concreta puede alejarse muchísimo."
+                        "**Representativa** — la más típica del conjunto: sus puntos de campeón, "
+                        "de colista, su dispersión, su número de empates y su parecido con el "
+                        "orden esperado quedan todos cerca de la mediana.\n\n"
+                        "**La más parecida a lo esperado** — aquella cuya tabla final más se "
+                        "acerca al orden promedio de las simulaciones. Es la temporada con menos "
+                        "sorpresas.\n\n"
+                        "**La más caótica** — el extremo opuesto: el orden final casi no se "
+                        "parece al esperado. Muestra hasta dónde puede llegar la incertidumbre "
+                        "de una sola temporada."
                     )
 
         # -------------------------------------------------
