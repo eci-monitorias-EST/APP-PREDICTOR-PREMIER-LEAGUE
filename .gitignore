@@ -32,3 +32,7 @@ __pycache__/
 # Archivos locales auxiliares
 get-pip.py
 *.bundle
+
+# Respaldos locales y logs de corrida
+src/_backup_original/
+reports/log_corrida.txt

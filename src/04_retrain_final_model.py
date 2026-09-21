@@ -37,10 +37,16 @@ LABEL = "result"
 # 1. ELEGIR EL MEJOR MODELO SEGÚN 03_train_compare_models.py
 # =========================================
 results_df = pd.read_csv(REPORTS_DIR / "model_comparison_results.csv")
-best_row = results_df.sort_values("roc_auc_macro", ascending=False).iloc[0]
+# Mismo criterio que 03: gana el menor log-loss. El log-loss es una regla de
+# puntuacion propia (su minimo esta en la probabilidad verdadera), asi que es
+# la metrica correcta cuando el entregable son las probabilidades que muestra
+# la app. Ordenar por ROC-AUC aqui podria elegir un modelo distinto al que 03
+# declaro ganador.
+best_row = results_df.sort_values("log_loss", ascending=True).iloc[0]
 best_model_name = best_row["model"]
 print(f"Modelo ganador según reports/model_comparison_results.csv:\n  -> {best_model_name}")
-print(f"  ROC-AUC macro = {best_row['roc_auc_macro']:.4f} | Log-loss = {best_row['log_loss']:.4f}")
+print(f"  Log-loss = {best_row['log_loss']:.4f} (criterio de seleccion) | "
+      f"ROC-AUC macro = {best_row['roc_auc_macro']:.4f}")
 
 with open(REPORTS_DIR / "best_hyperparams.json") as f:
     best_hyperparams = json.load(f)
@@ -49,8 +55,6 @@ if "Random Forest" in best_model_name:
     model_key = "rf"
 elif "XGBoost" in best_model_name:
     model_key = "xgb"
-elif "Gradient Boosting proxy" in best_model_name:
-    model_key = "gb_proxy"
 elif "Keras" in best_model_name:
     model_key = "mlp_keras"
 elif "MLP" in best_model_name or "Red neuronal" in best_model_name or "Red Neuronal" in best_model_name:
@@ -73,9 +77,6 @@ elif model_key == "xgb":
     sys.path.insert(0, str(Path(__file__).resolve().parent))
     from xgb_wrapper import XGBClassifierWithStringLabels
     clf = XGBClassifierWithStringLabels(random_state=RANDOM_STATE, **hyperparams)
-elif model_key == "gb_proxy":
-    from sklearn.ensemble import HistGradientBoostingClassifier
-    clf = HistGradientBoostingClassifier(random_state=RANDOM_STATE, **hyperparams)
 elif model_key == "mlp":
     clf = MLPClassifier(
         max_iter=1000, early_stopping=False, random_state=RANDOM_STATE, **hyperparams,
@@ -83,11 +84,22 @@ elif model_key == "mlp":
 elif model_key == "mlp_keras":
     import sys
     sys.path.insert(0, str(Path(__file__).resolve().parent))
+    from tensorflow import keras
     from scikeras.wrappers import KerasClassifier
     from keras_model_builder import build_keras_model
+
+    # El modelo final tiene que entrenarse IGUAL que el que gano la comparacion
+    # en 03. Alli la seleccion se hizo con epochs=200 + EarlyStopping; si aqui
+    # se entrenara con 100 epocas fijas, el modelo desplegado no seria el que
+    # se midio (con batch_size grande y SGD lento, se quedaria corto).
+    early_stop = keras.callbacks.EarlyStopping(
+        monitor="val_loss", patience=15, restore_best_weights=True, verbose=0,
+    )
     clf = KerasClassifier(
         model=build_keras_model,
-        epochs=100,
+        epochs=200,
+        callbacks=[early_stop],
+        fit__validation_split=0.15,
         verbose=0,
         random_state=RANDOM_STATE,
         **hyperparams,  # hidden_layer_sizes, activation, alpha, dropout, batch_size
