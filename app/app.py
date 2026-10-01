@@ -1,14 +1,18 @@
 """
 app.py
-App de Streamlit con dos pestañas:
+App de Streamlit con cuatro pestañas:
 
-  1. "Predecir un partido": el usuario elige local y visitante, y la app
+  1. "¿Cómo se usa?": guía paso a paso para usar la app (tab_instructivo.py).
+
+  2. "Predecir un partido": el usuario elige local y visitante, y la app
      muestra la probabilidad de victoria local / empate / victoria visitante
      usando el modelo entrenado en src/04_retrain_final_model.py.
 
-  2. "Temporada 2026-2027": resultados de la simulación de Monte Carlo que
+  3. "Temporada 2026-2027": resultados de la simulación de Monte Carlo que
      genera src/05_predict_next_season.py — tabla de posiciones esperada con
      su incertidumbre, y el detalle partido a partido de los 380 encuentros.
+
+  4. "Diccionario de datos": variables del proyecto (tab_diccionario.py).
 
 Ejecutar con: streamlit run app/app.py   (desde la raíz del proyecto)
 """
@@ -23,6 +27,8 @@ import altair as alt
 
 from team_colors import get_team_color, DEFAULT_COLOR
 from team_badges import render_team_badge
+from tab_instructivo import render_instructivo
+from tab_diccionario import render_diccionario
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 PROCESSED_DIR = BASE_DIR / "data" / "processed"
@@ -169,6 +175,17 @@ def predict_probabilities(home_team: str, away_team: str):
     }
 
 
+# Partido de ejemplo para la guía y el diccionario.
+EJEMPLO_LOCAL = "Arsenal" if "Arsenal" in TEAM_LIST else TEAM_LIST[0]
+EJEMPLO_VISITANTE = "Liverpool" if "Liverpool" in TEAM_LIST else TEAM_LIST[1]
+
+
+@st.cache_data
+def prediccion_ejemplo(home_team: str, away_team: str) -> dict:
+    """Probabilidades del partido de ejemplo, calculadas una sola vez."""
+    return {k: float(v) for k, v in predict_probabilities(home_team, away_team).items()}
+
+
 def render_probability_bar(home_team, away_team, probs):
     home_color = get_team_color(home_team)
     away_color = get_team_color(away_team)
@@ -214,7 +231,23 @@ st.caption(
     f"entrenado con {metadata['trained_rows']} partidos (hasta {metadata['trained_through_season']})"
 )
 
-tab_partido, tab_temporada = st.tabs(["Predecir un partido", "Temporada 2026-2027"])
+tab_guia, tab_partido, tab_temporada, tab_diccionario = st.tabs(
+    ["¿Cómo se usa?", "Predecir un partido", "Temporada 2026-2027", "Diccionario de datos"])
+
+probs_ejemplo = prediccion_ejemplo(EJEMPLO_LOCAL, EJEMPLO_VISITANTE)
+_sims_guia = load_simulaciones_completas()
+N_SIMULACIONES = _sims_guia["puntos"].shape[0] if _sims_guia else 10_000
+
+with tab_guia:
+    render_instructivo(
+        n_partidos=metadata["trained_rows"],
+        n_simulaciones=N_SIMULACIONES,
+        local=EJEMPLO_LOCAL,
+        visitante=EJEMPLO_VISITANTE,
+        probs=probs_ejemplo,
+        mostrar_barra=render_probability_bar,
+    )
+
 
 with tab_partido:
   with st.container(border=True):
@@ -265,7 +298,7 @@ with tab_partido:
 
 
 # =========================================
-# PESTAÑA 2: TEMPORADA SIMULADA
+# PESTAÑA 3: TEMPORADA SIMULADA
 # =========================================
 NOMBRES_DESTACADAS = {
     "representativa": "Representativa (típica en todo)",
@@ -577,3 +610,17 @@ with tab_temporada:
                     "unos 1.035 puntos, como una temporada real, en vez de los 1.140 que "
                     "saldrían si nunca hubiera empates."
                 )
+
+
+# =========================================
+# PESTAÑA 4: DICCIONARIO DE DATOS
+# =========================================
+with tab_diccionario:
+    _, tabla_dicc = load_simulacion()
+    render_diccionario(
+        elo_ratings, home_form, away_form, tabla_dicc,
+        local=EJEMPLO_LOCAL,
+        visitante=EJEMPLO_VISITANTE,
+        probs=probs_ejemplo,
+        n_simulaciones=N_SIMULACIONES,
+    )

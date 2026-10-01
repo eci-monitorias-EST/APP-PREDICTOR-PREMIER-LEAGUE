@@ -147,3 +147,321 @@ hr {
   border-radius: 6px;
   background-color: var(--panel);
 }
+
+/* =========================================================================
+   Pestañas para estudiantes: "¿Cómo se usa?" y "Diccionario de datos"
+   ========================================================================= */
+
+/* --- Texto de apoyo compartido --- */
+.guia-intro {
+  margin: 0.4rem 0 1.2rem;
+}
+
+.guia-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 1.15;
+  margin-bottom: 0.6rem;
+}
+
+.guia-texto {
+  font-size: 0.97rem;
+  line-height: 1.6;
+  margin-bottom: 0.6rem;
+  max-width: 62ch;
+}
+
+.guia-texto--suave {
+  color: var(--ink-muted);
+  font-size: 0.9rem;
+}
+
+.guia-texto--suave b,
+.guia-texto--suave i {
+  color: var(--ink);
+}
+
+/* --- Pasos numerados con camiseta --- */
+ol.pasos {
+  list-style: none;
+  position: relative;
+  padding: 0;
+  margin: 0.6rem 0 1.2rem;
+}
+
+ol.pasos li.paso {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin: 0 0 1.05rem 0;
+  padding: 0;
+  position: relative;
+}
+
+/* línea de cal que une cada camiseta con la siguiente */
+ol.pasos li.paso:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 46px;
+  bottom: -1.05rem;
+  border-left: 2px dashed rgba(245, 247, 242, 0.22);
+}
+
+.paso-camiseta {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+}
+
+.paso-camiseta path {
+  fill: var(--whistle);
+}
+
+.paso-camiseta text {
+  fill: #12271D;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 19px;
+}
+
+.paso-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+  padding-top: 0.45rem;
+}
+
+.paso-titulo i {
+  color: var(--whistle);
+  font-style: normal;
+}
+
+.paso-texto {
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-top: 0.15rem;
+}
+
+.paso-texto b,
+.paso-texto i {
+  color: var(--ink);
+}
+
+/* --- Ejemplo de la barra y la nota sobre probabilidad --- */
+.ejemplo-etiqueta {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  margin: 0.2rem 0 0.4rem 0;
+}
+
+.nota-clave {
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--whistle);
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem 0.4rem;
+  margin: 0.9rem 0 0.8rem;
+}
+
+.nota-clave-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--whistle);
+  margin: 0.2rem 0 0.25rem;
+}
+
+/* --- Retos --- */
+.retos {
+  display: grid;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+}
+
+.reto {
+  background-color: var(--panel);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--whistle);
+  border-radius: 6px;
+  padding: 0.8rem 1rem;
+}
+
+.reto-titulo {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.02rem;
+  font-weight: 500;
+}
+
+.reto-texto {
+  color: var(--ink-muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+  margin-top: 0.2rem;
+}
+
+.reto-texto b,
+.reto-texto i {
+  color: var(--ink);
+}
+
+/* --- Leyenda de tipos de dato --- */
+.tipos {
+  margin: 0 0 1.2rem;
+}
+
+.tipos-titulo {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  margin-bottom: 0.45rem;
+}
+
+.tipos-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1rem;
+}
+
+.tipo-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+}
+
+.tipo-item b {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.tipo-muestra {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+  margin-right: 0.4rem;
+}
+
+/* --- Láminas del álbum (una por variable) --- */
+.album {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin: 0.7rem 0 1.6rem;
+}
+
+.lamina {
+  display: flex;
+  flex-direction: column;
+  background-color: #F5F7F2;
+  border-radius: 10px;
+  padding: 6px;
+}
+
+.lamina-cara {
+  display: flex;
+  flex-direction: column;
+  min-height: 132px;
+  border-radius: 6px;
+  padding: 0.55rem 0.7rem 0.65rem;
+}
+
+.lamina-cara,
+.lamina-cara * {
+  color: #0B1F17;
+}
+
+.lamina-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lamina-cara .lamina-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 50%;
+  background-color: #0B1F17;
+  color: #F5F7F2;
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.lamina-tipo {
+  font-size: 0.72rem;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  padding: 0.1rem 0.5rem;
+}
+
+.lamina-valor {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 2.35rem;
+  line-height: 1.05;
+  margin-top: auto;
+  padding-top: 0.6rem;
+  overflow-wrap: anywhere;
+}
+
+.lamina-cara .lamina-pie {
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: rgba(11, 31, 23, 0.78);
+  margin-top: 0.2rem;
+}
+
+.lamina-cuerpo {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.65rem 0.55rem 0.4rem;
+}
+
+.lamina-cuerpo,
+.lamina-cuerpo * {
+  color: #24382D;
+}
+
+.lamina-cuerpo .lamina-nombre {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 600;
+  font-size: 1.12rem;
+  color: #0B1F17;
+}
+
+.lamina .lamina-codigo code {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: #2E4A3B;
+  background-color: #E1E8E2;
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  margin: 0.3rem 0.25rem 0 0;
+}
+
+.lamina-cuerpo .lamina-texto {
+  font-size: 0.86rem;
+  line-height: 1.45;
+  margin: 0.45rem 0 0.55rem;
+}
+
+.lamina-cuerpo .lamina-valores {
+  margin-top: auto;
+  padding-top: 0.45rem;
+  border-top: 1px dashed #C3CEC6;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  color: #4A5F52;
+}
+
+.lamina-cuerpo .lamina-valores b {
+  color: #0B1F17;
+}
