@@ -22,6 +22,8 @@ proyecto_final/
 │   ├── app.py                <- la app de Streamlit
 │   ├── team_colors.py        <- colores por equipo para la barra de probabilidades
 │   ├── team_badges.py        <- iniciales por equipo para la ficha circular (sin logos con derechos)
+│   ├── tab_instructivo.py    <- pestaña "¿Cómo se usa?" (guía para estudiantes de colegio)
+│   ├── tab_diccionario.py    <- pestaña "Diccionario de datos" (variables como láminas de álbum)
 │   └── assets/
 │       └── style.css         <- identidad visual (colores, tipografías Oswald/Inter)
 ├── .streamlit/
